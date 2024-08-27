@@ -41,3 +41,5 @@ docker run -p 8080:8080 todo
 
 docker ps
 
+Otići u Docker Desktop i okrenuti aplikaciju ili jednostavno u web pretraživač unijeti http://localhost:8080
+
