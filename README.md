@@ -29,6 +29,7 @@ Prvo, moraš imati instaliran Git na svom računaru.
 I obavezno pokrenut Docker Desktop
 
 cd Downloads
+
 git clone https://github.com/V-DevCode/InformacijskiSustaviProjekt.git
 
 cd InformacijskiSustaviProjekt
