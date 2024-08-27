@@ -25,9 +25,10 @@ Pruža alat za analizu podataka o biciklima u skladištu.
 Izvještaji i grafikon koji pokriva broj bicikala po namjeni.
 
 <h1>Upute za instalaciju</h1>
+! OS Windows !
 <h4>Prvo, moraš imati instaliran Git na svom računalu.
 I obavezno pokrenut Docker Desktop. Nakon toga naredbe redom unositi u terminal.</h4>
-! OS Windows !
+
 
 cd Downloads
 
