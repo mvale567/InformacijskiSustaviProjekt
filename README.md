@@ -37,7 +37,7 @@ cd InformacijskiSustaviProjekt
 
 docker build -t todo .
 
-docker ps
-
 docker run -p 8080:8080 todo
+
+docker ps
 
