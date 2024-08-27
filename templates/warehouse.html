@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Bike Warehouse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="inner-container">
+        <nav class="inner-nav">
+            <ul>
+                <li><a href="{{ url_for('vrati_bicikle') }}" target="inner-content-frame"><i
+                            class="fa fa-home"></i>Home</a></li>
+                <li><a href="{{ url_for('dodaj_bicikl') }}" target="inner-content-frame"><i
+                            class="fa fa-plus-circle"></i>Add</a></li>
+                <li><a href="{{ url_for('vrati_bicikle_edit') }}" target="inner-content-frame"><i
+                            class="fa fa-edit"></i>Actions</a></li>
+                <li><a href="{{ url_for('vizualizacija') }}" target="inner-content-frame"><i
+                            class="fa fa-chart-line"></i>Analysis</a></li>
+            </ul>
+        </nav>
+        <div class="iframe-container">
+            <iframe name="inner-content-frame" src="{{ url_for('vrati_bicikle') }}"
+                class="inner-content-frame"></iframe>
+        </div>
+    </div>
+</body>
+
+<style>
+    .inner-container {
+        width: 95%;
+        margin: auto;
+        margin-top: 80px;
+        min-height: 85vh;
+        background-image: linear-gradient(rgba(208, 209, 224, 0.65), rgba(38, 45, 105, 0.65)), url(/static/image/warehouse-background-pzkv8y7kvdmmnyej.jpg);
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+        border-radius: 5px;
+        display: flex;
+    }
+
+    .inner-nav {
+        width: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 20px;
+    }
+
+    .inner-nav ul {
+        list-style: none;
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .inner-nav ul li {
+        margin: 30px 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .inner-nav ul li a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .inner-nav ul li a i {
+        font-size: 36px;
+        margin-bottom: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .inner-nav ul li a:hover i {
+        transform: scale(1.2);
+        color: #17407d9a;
+    }
+
+    .inner-nav ul li:hover a {
+        transform: scale(1.2);
+        color: #17407d9a;
+    }
+
+    .iframe-container {
+        width: 100%;
+        flex-grow: 1;
+        overflow: hidden;
+        margin-top: 0px;
+    }
+
+    .iframe-container iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+</style>
+
+</html>

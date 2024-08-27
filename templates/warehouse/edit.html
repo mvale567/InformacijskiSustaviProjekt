@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popis Bicikala</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>Popis Bicikala</h2>
+        <ul class="list-group">
+            {% for bicikl in bicikli %}
+            <li class="list-group-item">
+                <div>
+                    <div>
+                        <strong>{{ bicikl.proizvodac }} - {{ bicikl.model }}</strong>
+                        <small>
+                            Velicina: {{ bicikl.velicina }} <br>
+                            Tezina: {{ bicikl.tezina }} kg <br>
+                            Broj Brzina: {{ bicikl.broj_brzina }} <br>
+                            Vrsta Namjene: {{ bicikl.vrsta_namjene }} <br>
+                            Godina Proizvodnje: {{ bicikl.godina_proizvodnje }} <br>
+                            Cena: {{ bicikl.cijena }} <br>
+                            Opis: {{ bicikl.opis }}
+                        </small>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="edit" onclick="editBicikl('{{ bicikl.id }}')">Edit</button>
+                        <button class="delete" onclick="obrisiBicikl('{{ bicikl.id }}')">Delete</button>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div id="editModal">
+        <div>
+            <span id="closeModal">&times;</span>
+            <h3>Uredi Bicikl</h3>
+            <form id="editForm">
+                <label for="proizvodac">Proizvođač:</label>
+                <input type="text" id="proizvodac" name="proizvodac" required><br><br>
+
+                <label for="model">Model:</label>
+                <input type="text" id="model" name="model" required><br><br>
+
+                <label for="velicina">Velicina:</label>
+                <select class="form-control" id="velicina" name="velicina" required>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select><br><br>
+
+                <label for="tezina">Težina:</label>
+                <select class="form-control" id="tezina" name="tezina" required>
+                    <option value="5">5 kg</option>
+                    <option value="10">10 kg</option>
+                    <option value="15">15 kg</option>
+                    <option value="20">20 kg</option>
+                </select><br><br>
+
+                <label for="broj_brzina">Broj Brzina:</label>
+                <select class="form-control" id="broj_brzina" name="broj_brzina" required>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="18">18</option>
+                    <option value="20">20</option>
+                </select><br><br>
+
+                <label for="vrsta_namjene">Vrsta Namjene:</label>
+                <select class="form-control" id="vrsta_namjene" name="vrsta_namjene" required>
+                    <option value="Cestovni">Cestovni</option>
+                    <option value="Brdski">Brdski</option>
+                    <option value="Gradski">Gradski</option>
+                    <option value="Električni">Električni</option>
+                </select><br><br>
+
+                <label for="godina_proizvodnje">Godina Proizvodnje:</label>
+                <select class="form-control" id="godina_proizvodnje" name="godina_proizvodnje" required>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select><br><br>
+
+                <label for="cijena">Cena:</label>
+                <input type="number" id="cijena" name="cijena" required><br><br>
+
+                <label for="opis">Opis:</label>
+                <textarea id="opis" name="opis" rows="4" required></textarea><br><br>
+
+                <button type="submit">Sačuvaj</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function obrisiBicikl(biciklId) {
+            if (confirm('Jeste li sigurni da želite obrisati ovaj bicikl?')) {
+                fetch(`/bicikli/${biciklId}`, { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.response === 'Success') {
+                            // Osveži stranicu nakon brisanja
+                            location.reload();
+                        } else {
+                            console.error('Došlo je do greške prilikom brisanja bicikla:', data.error);
+                        }
+                    })
+                    .catch(error => console.error('Došlo je do greške prilikom izvršavanja DELETE zahteva:', error));
+            }
+        }
+
+        function editBicikl(biciklId) {
+            // Otvori modal
+            document.getElementById('editModal').style.display = 'flex';
+
+            // Preuzmi podatke o biciklu i popuni formu
+            fetch(`/bicikl/${biciklId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        document.getElementById('proizvodac').value = data.proizvodac;
+                        document.getElementById('model').value = data.model;
+                        document.getElementById('velicina').value = data.velicina;
+                        document.getElementById('tezina').value = data.tezina;
+                        document.getElementById('broj_brzina').value = data.broj_brzina;
+                        document.getElementById('vrsta_namjene').value = data.vrsta_namjene;
+                        document.getElementById('godina_proizvodnje').value = data.godina_proizvodnje;
+                        document.getElementById('cijena').value = data.cijena;
+                        document.getElementById('opis').value = data.opis;
+
+                        // Postavi ID bicikla na formu za kasnije slanje
+                        document.getElementById('editForm').dataset.biciklId = biciklId;
+                    }
+                })
+                .catch(error => console.error('Greška pri preuzimanju podataka:', error));
+        }
+
+        document.getElementById('closeModal').addEventListener('click', function () {
+            document.getElementById('editModal').style.display = 'none';
+        });
+
+        document.getElementById('editForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const biciklId = this.dataset.biciklId;
+            const formData = new FormData(this);
+            const jsonRequest = {};
+
+            formData.forEach((value, key) => {
+                jsonRequest[key] = value;
+            });
+
+            fetch(`/bicikli/${biciklId}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(jsonRequest)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.response === 'Success') {
+                        // zatvori i osvjezi stranicu 
+                        document.getElementById('editModal').style.display = 'none';
+                        location.reload();
+                    } else {
+                        console.error('Greška pri ažuriranju bicikla:', data.error);
+                    }
+                })
+                .catch(error => console.error('Greška pri slanju PATCH zahteva:', error));
+        });
+    </script>
+</body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+    }
+
+    h2 {
+        color: #333;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .list-group {
+        list-style: none;
+        padding: 0;
+    }
+
+    .list-group-item {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 10px 0;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .list-group-item div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .list-group-item strong {
+        font-size: 1.2em;
+        width: 200px;
+        display: block;
+        color: #007bff;
+
+    }
+
+    .list-group-item small {
+        font-size: 15px;
+        color: #666;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .action-buttons button {
+        padding: 5px 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        font-size: 0.9em;
+        color: white;
+    }
+
+    .action-buttons button.delete {
+        background-color: #dc3545;
+    }
+
+    .action-buttons button.edit {
+        background-color: #28a745;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            width: 95%;
+        }
+    }
+
+    #editModal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+
+    #editModal div {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        max-width: 500px;
+        margin: auto;
+        position: relative;
+    }
+
+    #closeModal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 20px;
+    }
+</style>
+
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vizualizacija</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+    <h1>Vizualizacija Bicikala</h1>
+    <div id="chartContainer">
+        <canvas id="biciklChart" width="600" height="400"></canvas>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const bicikli = JSON.parse('{{ bicikli | tojson | safe }}');
+
+            const vrstaNamjeneCount = {};
+
+            // vrsta namjene
+            bicikli.forEach(bicikl => {
+                const vrsta = bicikl.vrsta_namjene;
+                if (vrstaNamjeneCount[vrsta]) {
+                    vrstaNamjeneCount[vrsta]++;
+                } else {
+                    vrstaNamjeneCount[vrsta] = 1;
+                }
+            });
+
+            const labels = Object.keys(vrstaNamjeneCount);
+            const data = Object.values(vrstaNamjeneCount);
+
+            // grafa
+            const ctx = document.getElementById('biciklChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Broj bicikala po vrsti namjene',
+                        data: data,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+
+    h1 {
+        color: #333;
+        margin: 20px 0;
+    }
+
+    #chartContainer {
+        width: 100%;
+        max-width: 700px;
+        margin: 20px auto;
+        padding: 20px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+    }
+
+    canvas {
+        width: 400px;
+        height: 500px;
+    }
+</style>
+
+</html>

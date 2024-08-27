@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popis Bicikala</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>Popis Bicikala</h2>
+        <ul class="list-group">
+            {% for bicikl in bicikli %}
+            <li class="list-group-item">
+                <div>
+                    <div>
+                        <strong>{{ bicikl.proizvodac }} - {{ bicikl.model }}</strong>
+                        <small>
+                            Veličina: {{ bicikl.velicina }} <br>
+                            Težina: {{ bicikl.tezina }} kg <br>
+                            Broj brzina: {{ bicikl.broj_brzina }} <br>
+                            Vrsta namjene: {{ bicikl.vrsta_namjene }} <br>
+                            Godina proizvodnje: {{ bicikl.godina_proizvodnje }} <br>
+                            Cijena: {{ bicikl.cijena }} <br>
+                            Opis: {{ bicikl.opis }}
+                        </small>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .container {
+        background-color: transparent;
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+
+    }
+
+    h2 {
+        color: #333;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .list-group {
+        list-style: none;
+        padding: 0;
+    }
+
+    .list-group-item {
+        background-color: #fff;
+        border: 1px solid #0e467a;
+        border-radius: 6px;
+        margin: 10px 0;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .list-group-item div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .list-group-item strong {
+        display: block;
+        font-size: 1.2em;
+        color: #096edb;
+        width: 200px;
+    }
+
+    .list-group-item small {
+        font-size: 15px;
+        color: #535353;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            width: 95%;
+        }
+    }
+</style>
+
+</html>

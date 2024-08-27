@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Bike Warehouse</title>
+</head>
+
+<body>
+    <div class="container-add">
+        <h2>Dodaj novi artikl</h2>
+        <form method="POST">
+            <div class="input-box">
+                <label for="proizvodac" class="form-label">Proizvođač:</label>
+                <input type="text" class="form-control" id="proizvodac" name="proizvodac" required>
+            </div>
+            <div class="input-box">
+                <label for="model" class="form-label">Model:</label>
+                <input type="text" class="form-control" id="model" name="model" required>
+            </div>
+            <div class="input-box">
+                <label for="velicina" class="form-label">Veličina:</label>
+                <select class="form-control" id="velicina" name="velicina" required>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label for="tezina" class="form-label">Težina:</label>
+                <select class="form-control" id="tezina" name="tezina" required>
+                    <option value="5">5 kg</option>
+                    <option value="10">10 kg</option>
+                    <option value="15">15 kg</option>
+                    <option value="20">20 kg</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label for="broj_brzina" class="form-label">Broj brzina:</label>
+                <select class="form-control" id="broj_brzina" name="broj_brzina" required>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label for="vrsta_namjene" class="form-label">Vrsta namjene:</label>
+                <select class="form-control" id="vrsta_namjene" name="vrsta_namjene" required>
+                    <option value="Cestovni">Cestovni</option>
+                    <option value="Brdski">Brdski</option>
+                    <option value="Gradski">Gradski</option>
+                    <option value="Električni">Električni</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label for="godina_proizvodnje" class="form-label">Godina proizvodnje:</label>
+                <select class="form-control" id="godina_proizvodnje" name="godina_proizvodnje" required>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
+            </div>
+            <div class="input-box">
+                <label for="cijena" class="form-label">Cijena:</label>
+                <input type="text" class="form-control" id="cijena" name="cijena" required>
+            </div>
+            <div class="input-box opis">
+                <label for="opis" class="form-label">Opis:</label>
+                <input type="text" class="form-control" id="opis" name="opis" required>
+            </div>
+            <button type="submit" class="add-btn">Dodaj</button>
+        </form>
+    </div>
+</body>
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: transparent;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container-add {
+        background-color: transparent;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .input-box {
+        margin-bottom: 5px;
+    }
+
+    .input-box:nth-child(odd) {
+        margin-right: 15px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #131212;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    }
+
+    .add-btn {
+        grid-column: span 2;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .opis {
+        grid-column: span 2;
+        width: 100%;
+    }
+</style>
+
+</html>
