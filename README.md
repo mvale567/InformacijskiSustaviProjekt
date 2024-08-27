@@ -28,11 +28,14 @@ Izvještaji i grafikon koji pokriva broj bicikala po namjeni.
 Prvo, moraš imati instaliran Git na svom računaru.
 I obavezno pokrenut Docker Desktop
 
-cd Documents
+cd Downloads
 git clone https://github.com/V-DevCode/InformacijskiSustaviProjekt.git
+
 cd InformacijskiSustaviProjekt
 
-DOCKER:
 docker build -t todo .
+
 docker ps
+
 docker run -p 8080:8080 todo
+
