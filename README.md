@@ -26,7 +26,7 @@ Izvještaji i grafikon koji pokriva broj bicikala po namjeni.
 
 <h1>Upute za instalaciju</h1>
 Prvo, moraš imati instaliran Git na svom računaru.
-I obavezno pokrenut Docker Desktop
+I obavezno pokrenut Docker Desktop. Nakon toga naredbe redom unositi u terminal.
 
 cd Downloads
 
